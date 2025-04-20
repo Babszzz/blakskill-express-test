@@ -4,6 +4,25 @@ const createTrade = async (req, res) => {
   try {
     const { type, user_id, symbol, shares, price, timestamp } = req.body;
 
+    const allowedFields = [
+      "type",
+      "user_id",
+      "symbol",
+      "shares",
+      "price",
+      "timestamp",
+    ];
+
+    const extraFields = Object.keys(req.body).filter(
+      (field) => !allowedFields.includes(field)
+    );
+
+    if (extraFields.length > 0) {
+      return res
+        .status(400)
+        .json({ message: `Invalid fields: ${extraFields.join(", ")}` });
+    }
+
     const missingFields = [];
 
     if (!type) missingFields.push("type");
