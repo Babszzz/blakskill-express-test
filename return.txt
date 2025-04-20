@@ -1,2 +1,0 @@
-"prestart": "npm install",
-    "pretest": "npm install",
