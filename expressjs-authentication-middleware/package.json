@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon bin/www",
+    "prestart": "npm install",
+    "pretest": "npm install",
     "start": "node bin/www",
     "test": "./node_modules/.bin/mocha test"
   },
