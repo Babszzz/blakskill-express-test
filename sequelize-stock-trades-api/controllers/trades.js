@@ -34,6 +34,7 @@ const createTrade = async (req, res) => {
 
     if (missingFields.length > 0) {
       return res.status(400).json({
+        status: "failed",
         message: `Missing required fields: ${missingFields.join(", ")}`,
       });
     }
@@ -50,7 +51,9 @@ const createTrade = async (req, res) => {
     res.status(201).json(trade);
   } catch (error) {
     console.error("Error creating trade:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res
+      .status(500)
+      .json({ status: "failed", message: "Internal server error" });
   }
 };
 
@@ -67,7 +70,9 @@ const getAllTrades = async (req, res) => {
     res.status(200).json(trades);
   } catch (error) {
     console.error("Error fetching trades:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res
+      .status(500)
+      .json({ status: "failed", message: "Internal server error" });
   }
 };
 
@@ -82,7 +87,9 @@ const getTradeById = async (req, res) => {
     res.status(200).json(trade);
   } catch (error) {
     console.error("Error fetching trade by ID:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res
+      .status(500)
+      .json({ status: "failed", message: "Internal server error" });
   }
 };
 
